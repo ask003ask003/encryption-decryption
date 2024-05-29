@@ -73,8 +73,16 @@ async def decrypt_file(file: UploadFile = File(...)):
     data = await file.read()
     decrypted_data = cipher.decrypt(data)
     unpadded_data = unpad(decrypted_data)
+
+    print(unpadded_data)
+
+    if len(unpadded_data) == 0:
+        print("inside")
+        return "error decrypting"
     
     with open(SAVE_FILE_PATH, 'wb') as f:
         f.write(unpadded_data)
+
+    print("exec")
     
     return FileResponse(path=SAVE_FILE_PATH,media_type="application/octet-stream",filename=new_filename)
