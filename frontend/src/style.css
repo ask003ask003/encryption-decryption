@@ -1,0 +1,8 @@
+.password-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.password-toggle input {
+    margin-right: 10px;
+}

@@ -1,0 +1,47 @@
+/* Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Chatbot Styling */
+.chat-history {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #e1f5fe;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.bot-message {
+    background-color: #e0f7fa;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* General Form Styling */
+.form-control {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-right: 5px;
+}
+
+.alert-info {
+    margin-top: 20px;
+    border-radius: 5px;
+}
