@@ -46,30 +46,43 @@ const FileUpload = () => {
             const blob = new Blob([response.data]);
             const text = await blob.text();
 
-            if (text === '\"error decrypting\"') {
-                setUploadStatus(`Error ${action}ing file`);
-            } else {
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-
-                const contentDisposition = response.headers['content-disposition'];
-                let filename = action === 'encrypt' ? 'encrypted_file.txt' : 'decrypted_file.txt';
-                if (contentDisposition) {
-                    const filenameMatch = contentDisposition.match(/filename="?(.+)"?/);
-                    if (filenameMatch.length === 2) {
-                        filename = filenameMatch[1];
-                    }
-                }
-
-                link.setAttribute('download', filename);
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-
-                setUploadStatus(`File ${action}ed successfully. Download should start automatically.`);
-                setFileContent(''); // Clear any previous error messages
+            console.log(text);
+            if (text == '\"Hashed succesfully\"') {
+                setUploadStatus(`hashed successfully`);
             }
+            else
+                if (text == '\"match\"') {
+                    setUploadStatus(`match`);
+                }
+                else
+                    if (text == '\"mismatch\"') {
+                        setUploadStatus(`mismatch`);
+                    }
+                    else
+                        if (text === '\"error decrypting\"') {
+                            setUploadStatus(`Error ${action}ing file`);
+                        } else {
+                            const url = window.URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = url;
+
+                            const contentDisposition = response.headers['content-disposition'];
+                            let filename = action === 'encrypt' ? 'encrypted_file.txt' : 'decrypted_file.txt';
+                            if (contentDisposition) {
+                                const filenameMatch = contentDisposition.match(/filename="?(.+)"?/);
+                                if (filenameMatch.length === 2) {
+                                    filename = filenameMatch[1];
+                                }
+                            }
+
+                            link.setAttribute('download', filename);
+                            document.body.appendChild(link);
+                            link.click();
+                            link.remove();
+
+                            setUploadStatus(`File ${action}ed successfully. Download should start automatically.`);
+                            setFileContent(''); // Clear any previous error messages
+                        }
         } catch (error) {
             setUploadStatus(`Error ${action}ing file`);
             console.error(`Error ${action}ing file:`, error);
@@ -124,6 +137,7 @@ const FileUpload = () => {
                                 <option value="rsa">RSA</option>
                                 <option value="aes">AES</option>
                                 <option value="des">DES</option>
+                                <option value="sha256">sha256</option>
                             </select>
                         </div>
                         <div className="mb-3">
